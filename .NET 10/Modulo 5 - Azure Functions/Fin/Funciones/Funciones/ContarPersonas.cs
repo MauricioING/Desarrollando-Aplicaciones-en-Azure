@@ -5,7 +5,7 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
-namespace Funciones;
+namespace Funciones.Funciones;
 
 public class ContarPersonas
 {
