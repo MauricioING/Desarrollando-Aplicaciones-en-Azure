@@ -1,0 +1,47 @@
+﻿@model List<Persona>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Ejemplo Azure App Service</h1>
+</div>
+
+<a class="btn btn-primary" href="/home/crear">Crear Persona</a>
+
+@if (Model.Any())
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Foto
+                </th>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var persona in Model)
+            {
+                <tr>
+                    <td><img src="@persona.FotoURL" height="200" /></td>
+                    <td>@persona.Id</td>
+                    <td>@persona.Nombre</td>
+                    <td><a class="btn btn-primary" href="/home/VerDetalle/@persona.Id">Ver detalle</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else
+{
+    <p>No hay personas para mostrar...</p>
+}
+
+

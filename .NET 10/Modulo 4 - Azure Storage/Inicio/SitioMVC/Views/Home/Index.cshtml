@@ -1,0 +1,41 @@
+﻿@model List<Persona>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Ejemplo Azure App Service</h1>
+</div>
+
+<a class="btn btn-primary" href="/home/crear">Crear Persona</a>
+
+@if (Model.Any())
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Nombre
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var persona in Model)
+            {
+                <tr>
+                    <td>@persona.Id</td>
+                    <td>@persona.Nombre</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else
+{
+    <p>No hay personas para mostrar...</p>
+}
+
+

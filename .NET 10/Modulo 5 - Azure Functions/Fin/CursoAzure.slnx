@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Comunes/Comunes.csproj" Id="57d4881d-f8bf-404e-89b0-2547695d4c91" />
+  <Project Path="Consola/Consola.csproj" Id="7116217a-72e3-4dea-ab60-978f169f34cf" />
+  <Project Path="Funciones/Funciones.csproj" Id="43c7e051-6faf-4cc7-8b7a-30687e1e0cb6" />
+  <Project Path="SitioMVC/SitioMVC.csproj" />
+</Solution>

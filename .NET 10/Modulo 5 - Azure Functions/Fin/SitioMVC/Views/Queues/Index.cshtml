@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Enviar texto";
+}
+
+<h2>Enviar mensaje al queue</h2>
+
+<form asp-action="Index" method="post">
+    <div class="form-group">
+        <label for="mensaje">Mensaje:</label>
+        <input type="text" class="form-control" id="mensaje" name="mensaje" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Enviar</button>
+</form>

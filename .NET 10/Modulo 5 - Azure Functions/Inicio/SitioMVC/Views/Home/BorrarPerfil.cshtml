@@ -1,0 +1,30 @@
+﻿@model PerfilPersona
+
+@{
+    ViewData["Title"] = "Borrar Perfil";
+}
+
+<h2>¿Desea borrar este perfil?</h2>
+
+<form asp-action="BorrarPerfil" method="post">
+    <input type="hidden" asp-for="PartitionKey" />
+    <input type="hidden" asp-for="RowKey" />
+
+
+    <div class="form-group">
+        <label asp-for="Idioma" class="form-label"></label>: @Model.Idioma
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="form-label">
+            Modo Oscuro: @Model.ModoOscuro
+        </label>
+    </div>
+
+    <button type="submit" class="btn btn-danger">Borrar</button>
+    <a href="/Home/VerDetalle/@Model.PartitionKey" class="btn btn-secondary">Regresar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

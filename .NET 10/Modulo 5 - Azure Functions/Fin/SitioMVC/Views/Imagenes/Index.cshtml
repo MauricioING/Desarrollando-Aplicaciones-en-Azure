@@ -1,0 +1,41 @@
+﻿@model EnviarImagenesViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Ejemplo de Función Duradera de Azure: Patrón expansión y contracción</h1>
+
+@if (TempData["mensaje"] is not null)
+{
+    <div class="alert alert-success">
+        @TempData["mensaje"]
+    </div>
+}
+
+<form method="post"
+      enctype="multipart/form-data">
+    <div class="mb-3">
+        <label asp-for="Correo" class="form-label"></label>
+        <input asp-for="Correo" class="form-control" />
+        <span asp-validation-for="Correo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Imágenes</label>
+        <input asp-for="Imagenes"
+               class="form-control"
+               type="file"
+               accept="image/*"
+               multiple />
+        <span asp-validation-for="Imagenes" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
