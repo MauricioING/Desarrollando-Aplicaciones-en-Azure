@@ -6,9 +6,16 @@ namespace SitioMVC.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IConfiguration configuration;
+
+        public HomeController(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
         public IActionResult Index()
         {
-            var personas = ObtenerPersonas(3);
+            var cantidadPersonas = configuration.GetValue<int>("cantidad-personas");
+            var personas = ObtenerPersonas(cantidadPersonas);
             return View(personas);
         }
 
