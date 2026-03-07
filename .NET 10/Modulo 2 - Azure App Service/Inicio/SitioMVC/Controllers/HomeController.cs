@@ -37,6 +37,7 @@ namespace SitioMVC.Controllers
 
         public IActionResult Privacy()
         {
+            //throw new Exception("Error en la acción Privacy");
             return View();
         }
 
