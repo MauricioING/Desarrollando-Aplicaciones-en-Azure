@@ -1,47 +1,39 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+using SitioMVC.Datos;
 using SitioMVC.Models;
 
 namespace SitioMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IConfiguration configuration;
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext context;
 
-        public HomeController(IConfiguration configuration,ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext context)
         {
-            this.configuration = configuration;
-            this._logger = logger;
+            this.context = context;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var cantidadPersonas = configuration.GetValue<int>("cantidad-personas");
-
-            _logger.LogInformation($"Iniciando acción Index en fecha {DateTime.UtcNow}");
-            _logger.LogWarning($"Advertencia: se detectó un parámetro sospechoso: {nameof(cantidadPersonas)} : {cantidadPersonas}");
-            _logger.LogError($"Aqui logueamos un error");
-
-            _logger.LogError($"Procesadores disponibles:{Environment.ProcessorCount}");
-
-            var personas = ObtenerPersonas(cantidadPersonas);
+            var personas = await context.Personas.ToListAsync();
             return View(personas);
         }
 
-        private List<Persona> ObtenerPersonas(int cantidadPersonas)
+        public IActionResult Crear()
+        {            
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Crear(PersonaCrearDTO personaCrearDTO)
         {
-            var respuesta = new List<Persona>();
+            var persona = new Persona { Nombre = personaCrearDTO.Nombre };
+            context.Add(persona);
+            await context.SaveChangesAsync();
 
-            for (int i = 0; i < cantidadPersonas; i++)
-            {
-                respuesta.Add(new Persona
-                {
-                    Id = Guid.NewGuid(),
-                    Nombre = $"Persona {i + 1}"
-                });
-            }
-
-            return respuesta;
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()

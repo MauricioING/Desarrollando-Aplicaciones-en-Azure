@@ -1,11 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+
+using SitioMVC.Datos;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//var a = 1;
-//var b = 0;
-//var c = a/b;
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDbContext<ApplicationDbContext>(opciones => opciones.UseSqlServer("name=DefaultConnection"));
 
 var app = builder.Build();
 
