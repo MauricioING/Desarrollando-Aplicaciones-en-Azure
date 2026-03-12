@@ -7,14 +7,23 @@ namespace SitioMVC.Controllers
     public class HomeController : Controller
     {
         private readonly IConfiguration configuration;
+        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(IConfiguration configuration)
+        public HomeController(IConfiguration configuration,ILogger<HomeController> logger)
         {
             this.configuration = configuration;
+            this._logger = logger;
         }
         public IActionResult Index()
         {
             var cantidadPersonas = configuration.GetValue<int>("cantidad-personas");
+
+            _logger.LogInformation($"Iniciando acción Index en fecha {DateTime.UtcNow}");
+            _logger.LogWarning($"Advertencia: se detectó un parámetro sospechoso: {nameof(cantidadPersonas)} : {cantidadPersonas}");
+            _logger.LogError($"Aqui logueamos un error");
+
+            _logger.LogError($"Procesadores disponibles:{Environment.ProcessorCount}");
+
             var personas = ObtenerPersonas(cantidadPersonas);
             return View(personas);
         }
