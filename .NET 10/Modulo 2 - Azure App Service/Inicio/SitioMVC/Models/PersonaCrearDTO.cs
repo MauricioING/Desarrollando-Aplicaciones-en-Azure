@@ -6,5 +6,7 @@ namespace SitioMVC.Models
     {
         [Required]
         public required string Nombre { get; set; }
+        public IFormFile Foto { get; set; }
+        public DateTime FechaNacimiento { get; set; }
     }
 }

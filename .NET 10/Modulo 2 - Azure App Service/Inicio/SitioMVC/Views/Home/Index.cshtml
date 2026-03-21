@@ -16,6 +16,9 @@
         <thead>
             <tr>
                 <th>
+                    Foto
+                </th>
+                <th>
                     Id
                 </th>
                 <th>
@@ -27,6 +30,7 @@
             @foreach (var persona in Model)
             {
                 <tr>
+                    <td><<img src="@persona.FotoUrl" height="200" alt="Alternate Text" /></td>
                     <td>@persona.Id</td>
                     <td>@persona.Nombre</td>
                 </tr>

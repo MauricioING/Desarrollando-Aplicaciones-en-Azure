@@ -29,7 +29,12 @@ namespace SitioMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear(PersonaCrearDTO personaCrearDTO)
         {
-            var persona = new Persona { Nombre = personaCrearDTO.Nombre };
+            var persona = new Persona 
+            { 
+                Nombre = personaCrearDTO.Nombre,
+                FotoUrl = "...",
+                FechaNacimiento = personaCrearDTO.FechaNacimiento
+            };
             context.Add(persona);
             await context.SaveChangesAsync();
 
