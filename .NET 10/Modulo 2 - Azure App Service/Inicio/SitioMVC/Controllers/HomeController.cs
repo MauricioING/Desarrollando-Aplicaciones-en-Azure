@@ -4,16 +4,20 @@ using Microsoft.EntityFrameworkCore;
 
 using SitioMVC.Datos;
 using SitioMVC.Models;
+using SitioMVC.Servicios;
 
 namespace SitioMVC.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext context;
+        private readonly IAlmacenadorArchivos almacenadorArchivos;
+        private readonly string contenedor = "personas";
 
-        public HomeController(ApplicationDbContext context)
+        public HomeController(ApplicationDbContext context,IAlmacenadorArchivos almacenadorArchivos)
         {
             this.context = context;
+            this.almacenadorArchivos = almacenadorArchivos;
         }
         public async Task<IActionResult> Index()
         {
@@ -29,10 +33,12 @@ namespace SitioMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear(PersonaCrearDTO personaCrearDTO)
         {
+            var fotoUrl = await almacenadorArchivos.Almacenar(contenedor, personaCrearDTO.Foto);
+
             var persona = new Persona 
             { 
                 Nombre = personaCrearDTO.Nombre,
-                FotoUrl = "...",
+                FotoUrl = fotoUrl,
                 FechaNacimiento = personaCrearDTO.FechaNacimiento
             };
             context.Add(persona);
